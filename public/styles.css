@@ -1,0 +1,283 @@
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #6b6b6b;
+  --line: #d3d6da;
+  --key: #d3d6da;
+  --green: #6aaa64;
+  --yellow: #c9b458;
+  --grey: #787c7e;
+  --soft: #f6f7f8;
+  --danger: #b3261e;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.app {
+  width: min(100% - 32px, 520px);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px 0 40px;
+}
+
+.topbar {
+  position: relative;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ececec;
+  margin-bottom: 34px;
+}
+
+.brand {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.top-link {
+  position: absolute;
+  left: 0;
+  border: 0;
+  background: transparent;
+  padding: 7px 0;
+  color: #444;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.screen {
+  display: grid;
+  justify-items: center;
+}
+
+.hero { padding-top: 54px; }
+.hero h2,
+.creator h2 {
+  margin: 0 0 12px;
+  font-size: 23px;
+  letter-spacing: -0.3px;
+  text-align: center;
+}
+
+.subtle {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+  margin: 0;
+}
+
+.primary,
+.secondary {
+  min-height: 44px;
+  border-radius: 4px;
+  padding: 0 18px;
+  font-weight: 700;
+}
+
+.primary {
+  margin-top: 28px;
+  border: 1px solid #111;
+  background: #111;
+  color: white;
+}
+.primary:hover { background: #2d2d2d; }
+.secondary {
+  border: 1px solid var(--line);
+  background: white;
+  color: #111;
+}
+
+.divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 23px 0;
+  color: #9a9a9a;
+  font-size: 11px;
+  font-weight: 700;
+}
+.divider::before,
+.divider::after { content: ''; height: 1px; background: #ececec; flex: 1; }
+
+.creator { width: min(100%, 360px); padding-top: 20px; }
+.creator form { width: 100%; margin-top: 28px; }
+.creator label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+.word-input {
+  width: 100%;
+  height: 47px;
+  border: 1px solid #a8a8a8;
+  border-radius: 3px;
+  padding: 0 13px;
+  font-size: 18px;
+  text-transform: uppercase;
+  outline: none;
+}
+.word-input:focus { border-color: #111; box-shadow: 0 0 0 1px #111; }
+.creator .primary { width: 100%; margin-top: 12px; }
+.hint { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+.error { color: var(--danger); min-height: 18px; font-size: 12px; margin-top: 8px; }
+
+.link-card {
+  width: 100%;
+  margin-top: 26px;
+  background: var(--soft);
+  border-radius: 5px;
+  padding: 14px;
+}
+.link-card p { margin: 0 0 9px; color: var(--muted); font-size: 12px; }
+.link-row { display: flex; gap: 8px; }
+.link-row input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid var(--line);
+  background: white;
+  padding: 9px 10px;
+  border-radius: 3px;
+  color: #444;
+  font-size: 12px;
+}
+.copy {
+  border: 0;
+  background: #111;
+  color: white;
+  border-radius: 3px;
+  padding: 0 13px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.game-wrap { width: 100%; display: grid; justify-items: center; }
+.identity {
+  margin: -20px 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.identity strong { color: #333; font-weight: 700; }
+.board {
+  display: grid;
+  gap: 5px;
+  width: min(100%, 350px);
+  justify-content: center;
+}
+.row { display: grid; gap: 5px; justify-content: center; }
+.tile {
+  width: var(--tile-size, 56px);
+  height: var(--tile-size, 56px);
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: calc(var(--tile-size, 56px) * .53);
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+.tile.filled { border-color: #878a8c; animation: pop .09s ease; }
+.tile.correct,
+.tile.present,
+.tile.absent { color: white; border-color: transparent; }
+.tile.correct { background: var(--green); }
+.tile.present { background: var(--yellow); }
+.tile.absent { background: var(--grey); }
+@keyframes pop { 50% { transform: scale(1.06); } }
+
+.toast { height: 33px; margin: 12px 0 0; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+
+.keyboard {
+  width: min(100%, 500px);
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+.key-row { display: flex; justify-content: center; gap: 5px; }
+.key {
+  height: 53px;
+  min-width: 28px;
+  flex: 1;
+  max-width: 43px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--key);
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 3px;
+}
+.key.wide { max-width: 66px; flex: 1.45; font-size: 10px; }
+.key.correct, .key.present, .key.absent { color: white; }
+.key.correct { background: var(--green); }
+.key.present { background: var(--yellow); }
+.key.absent { background: var(--grey); }
+
+.result {
+  width: min(100%, 390px);
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #ececec;
+}
+.result h2 { margin: 0; text-align: center; font-size: 20px; }
+.result .subtle { margin-top: 7px; }
+
+.leaderboard {
+  width: 100%;
+  margin-top: 24px;
+}
+.leaderboard-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.leaderboard h3 { margin: 0; font-size: 15px; }
+.leaderboard small { color: var(--muted); font-size: 10px; }
+.score-row {
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  align-items: center;
+  border-top: 1px solid #eeeeee;
+  gap: 8px;
+  font-size: 13px;
+}
+.score-row.you { font-weight: 700; }
+.rank { color: #8a8a8a; }
+.guesses { color: #444; }
+
+.play-again {
+  margin: 22px auto 0;
+  display: block;
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 12px;
+  color: #555;
+}
+
+@media (max-width: 420px) {
+  .app { width: min(100% - 18px, 520px); padding-top: 10px; }
+  .topbar { margin-bottom: 24px; }
+  .brand { font-size: 22px; }
+  .identity { margin-top: -8px; }
+}
+
+.creator-board { margin-top: 24px; }
+.leaderboard-empty { padding: 12px 0 4px; text-align: left; }

@@ -16,6 +16,7 @@ A deliberately simple custom Wordle clone inspired by the straightforward flow o
 - Each generated Wordle receives its own invisible game ID, so two creators using the same answer do not share scores
 - Replaying the same puzzle from the same browser does not create duplicate entries; the best guess count is kept
 
+
 ## Demo
 
 A 17-second product walkthrough is included at:
