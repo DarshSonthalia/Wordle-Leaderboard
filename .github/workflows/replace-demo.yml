@@ -1,0 +1,36 @@
+name: Replace demo with full-quality video
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/replace-demo.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  replace-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download original full-quality demo
+        run: |
+          mkdir -p demo
+          curl -L --fail --retry 3             "https://d2ol7oe51mr4n9.cloudfront.net/user_3JHF9WPjzvQVUaoRI8DYCZYRyXi/78711bdd-e97c-4128-9cc7-5945c8be8260.mp4"             -o demo/wordle-leaderboard-demo.mp4
+          bytes=$(stat -c%s demo/wordle-leaderboard-demo.mp4)
+          echo "Downloaded $bytes bytes"
+          test "$bytes" -ge 170000
+
+      - name: Commit full-quality video to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add demo/wordle-leaderboard-demo.mp4
+          if git diff --cached --quiet; then
+            echo "Video already matches full-quality source."
+          else
+            git commit -m "Replace demo with full-quality recording"
+            git push origin HEAD:main
+          fi
